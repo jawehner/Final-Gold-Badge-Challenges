@@ -9,10 +9,27 @@ namespace Challenge_3
     class OutingRepository
     {
         List<Outing> _outings = new List<Outing>();
-    }
 
-    public void DisplayCostOfAllOutings()
-    {
-        totalCost = 
+        public void AddOutingToList(Outing outing)
+        {
+            _outings.Add(outing);
+        }
+
+        public List<Outing> GetOutingsList()
+        {
+            return _outings;
+        }
+
+        public void DisplayCostOfAllOutings()
+        {
+
+            foreach (Outing outing in _outings)
+            {
+
+            }
+
+
+
+        }
     }
 }

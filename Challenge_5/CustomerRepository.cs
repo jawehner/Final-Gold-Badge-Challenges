@@ -8,10 +8,16 @@ namespace Challenge_5
 {
     class CustomerRepository
     {
-        List<Customer> customers = new List<Customer>();
+        List<Customer> _customers = new List<Customer>();
 
-        //list.sort
+        public void AddCustomerToList(Customer customer)
+        {
+            _customers.Add(customer);
+        }
 
-        //string.compare  
+        public List<Customer> GetList()
+        {
+            return _customers;
+        }
     }
 }

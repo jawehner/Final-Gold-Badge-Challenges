@@ -8,11 +8,13 @@ namespace Challenge_5
 {
     class ProgramUI
     {
-        CustomerRepository _customerRepository = new CustomerRepository();
+        CustomerRepository _customerRepo = new CustomerRepository();
+
+        public List<Customer> _customers = new List<Customer>();
 
         public void Run()
         {
-
+            _customers = _customerRepo.GetList();
             bool isRunning = true;
             while (isRunning)
             {
@@ -51,6 +53,14 @@ namespace Challenge_5
             }
         }
 
+        private void SeeAllCustomers()
+        {
+            foreach (Customer customer in _customers)
+            {
+                Console.WriteLine($"\nName: {customer.FirstName} {customer.LastName} " +
+                    $"\nID Number: {customer.CustomerID} \nEmail Message: {customer.Email}\n");
+            }
+        }
 
         private void CreateNewCustomer()
         {
@@ -61,6 +71,9 @@ namespace Challenge_5
 
             Console.WriteLine("Enter the customer's last name:");
             newCustomer.LastName = Console.ReadLine();
+
+            Console.WriteLine("Enter an ID number for customer:");
+            newCustomer.CustomerID = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the type of customer (former, current, or potential):");
             string input = Console.ReadLine();
@@ -83,15 +96,45 @@ namespace Challenge_5
                     Console.ReadLine();
                     break;
             }
+
+            _customerRepo.AddCustomerToList(newCustomer);
         }
         private void RemoveCustomer()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Enter the ID number of the customer you wish to delete:");
+            foreach (Customer customer in _customers)
+            {
+                Console.WriteLine(customer.CustomerID);
+            }
+            int deleteCustomer = int.Parse(Console.ReadLine());
+
+            foreach (Customer customer in _customers)
+            {
+                if (deleteCustomer == customer.CustomerID)
+                {
+                    _customers.Remove(customer);
+                    break;
+                }
+            }
         }
 
         private void UpdateCustomer()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Enter the ID number of the customer you wish to update:");
+            foreach (Customer customer in _customers)
+            {
+                Console.WriteLine(customer.CustomerID);
+            }
+            int updateCustomer = int.Parse(Console.ReadLine());
+
+            foreach(Customer customer in _customers)
+            {
+                if (updateCustomer == customer.CustomerID)
+                {
+                    _customers.Remove(customer);
+                }
+            }
+            CreateNewCustomer();
         }
     }
 }
